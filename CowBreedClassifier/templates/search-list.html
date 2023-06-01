@@ -1,0 +1,196 @@
+{% extends 'base.html' %}
+
+{% block css %}
+    <style>
+        .search-section {
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 4rem;
+            justify-content: center;
+            padding: 8rem 0;
+          }
+          .search-section form {
+            height: 4rem;
+            background: rgba(255, 255, 255, 0.3);
+            border: 1px solid black;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.25);
+            -webkit-backdrop-filter: blur(4px);
+                    backdrop-filter: blur(4px);
+            border-radius: 32px;
+            display: flex;
+            overflow: hidden;
+          }
+          .search-section form input {
+            flex: 1;
+            border: none;
+            outline: none;
+            background-color: transparent;
+            padding-left: 2rem;
+            font-size: 18px;
+          }
+          .search-section form input::-moz-placeholder {
+            color: black;
+          }
+          .search-section form input::placeholder {
+            color: black;
+          }
+          .search-section form button {
+            width: 6rem;
+            background-color: transparent;
+            border: none;
+            outline: none;
+            border-left: 1px solid black;
+          }
+          .search-section form i {
+            rotate: -90deg;
+            font-size: 24px;
+          }
+
+          .search-section .list-container {
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.3);
+            border: 1px solid black;
+            box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.25);
+            -webkit-backdrop-filter: blur(4px);
+                    backdrop-filter: blur(4px);
+            border-radius: 8px;
+          }
+
+          .search-section .list-top-container {
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid black;
+          }
+
+          .search-section .list-top-container a {
+            font-size: 16px;
+          }
+          .search-section .list-top-container a:hover {
+            text-decoration: underline;
+          }
+          .search-section .list-top-container .paginator {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+          }
+
+          .search-section .search-list-bottom-container {
+            padding-top: 2rem;
+          }
+          .search-section .result-card {
+            display: flex;
+            margin-top: 2rem;
+          }
+          .search-section .result-card-left {
+            min-width: 20rem;
+            max-width: 20rem;
+          }
+          .search-section .result-card-left img {
+            width: 100%;
+            border-radius: 8px;
+          }
+          .search-section .result-card-right {
+            font-size: 16px;
+            padding-left: 4rem;
+          }
+          .search-section .result-card-right strong {
+            font-size: 18px;
+          }
+          .search-section .result-card-right p {
+            padding: 0;
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+            line-height: 150%;
+            width: 80%;
+          }
+          .search-section .result-card-right a {
+            color: white;
+          }
+
+          @media screen and (max-width: 900px) and (min-width: 720px) {
+            
+            .search-section .result-card {
+              flex-direction: column;
+              gap: 3rem;
+            }
+            .search-section .result-card-left {
+              min-width: 100%;
+              max-width: 100%;
+            }
+            .search-section .result-card-right {
+              padding-left: 0;
+            }
+           
+          }
+          @media screen and (max-width: 720px) {
+            
+            
+            .search-section .result-card {
+              flex-direction: column;
+              gap: 3rem;
+            }
+            .search-section .result-card-left {
+              min-width: 100%;
+              max-width: 100%;
+            }
+            .search-section .result-card-right {
+              padding-left: 0;
+            }
+            .search-section .list-top-container span {
+              font-size: 16px;
+            }
+            .search-section .list-top-container .paginator {
+              gap: 12px;
+            }
+          }          
+    </style>
+{% endblock css %}
+    
+
+{% block main %}
+<section class="search-section">
+    <form action="{% url 'search_list' 1 %}" method="get">
+        <input type="search" name="search" id="search_id" placeholder="search breed ..." value="{{ search_for }}" required>
+        <button type="submit"><i class="las la-search"></i></button>
+    </form>
+    <div class="list-container">
+        <div class="list-top-container">
+            <span>Cow breeds</span>
+            <div class="paginator">
+              {% if page_obj.has_previous %}
+                <a href="{% url 'search_list' page_obj.previous_page_number %}"><i class="las la-angle-left"></i>prev</a>
+              {% endif %}
+              {% if page_obj.has_next %}
+                <a href="{% url 'search_list' page_obj.next_page_number %}">next<i class="las la-angle-right"></i></a>
+              {% endif %}
+            </div>
+        </div>
+        <div class="search-list-bottom-container">
+          
+          {% if page_obj.object_list %}
+            {% for breed in page_obj.object_list %}
+            <div class="result-card">
+                <div class="result-card-left">
+                    <img src="{{ breed.photo.url }}" alt="">
+                </div>
+                <div class="result-card-right">
+                    <strong>{{ breed.name|title }}</strong>
+
+                    <p>{{ breed.description|truncatechars:180 }}</p>
+                    <a href="{% url 'upload_details' detail=breed.id %}">read more</a>
+                </div>
+            </div>
+            {% endfor %}
+          {% else %}
+            <h1>No result found!</h1>
+          {% endif %}
+            
+          
+        </div>
+    </div>
+</section>
+{% endblock main %}
+    

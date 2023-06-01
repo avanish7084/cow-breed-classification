@@ -1,0 +1,279 @@
+{% extends 'base.html' %}
+
+
+{% block css %}
+<style>
+    .hero-section {
+        min-height: calc(100vh - 6rem);
+        max-height: calc(100vh - 6rem);
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      .hero-section h1 {
+        width: 80%;
+        font-weight: 50rem;
+        font-size: 64px;
+        font-weight: lighter;
+        text-align: center;
+        color: white;
+      }
+      .hero-section button {
+        width: 220px;
+        height: 48px;
+        background: rgba(255, 255, 255, 0.3);
+        border: 1px solid black;
+        -webkit-backdrop-filter: blur(4px);
+                backdrop-filter: blur(4px);
+        border-radius: 4px;
+        font-size: 18px;
+      }
+      .hero-section button i {
+        rotate: 45deg;
+      }
+      
+      .search-section {
+        min-height: 100vh;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 4rem;
+        justify-content: center;
+        padding: 8rem 0;
+      }
+      .search-section form {
+        height: 4rem;
+        background: rgba(255, 255, 255, 0.3);
+        border: 1px solid black;
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.25);
+        -webkit-backdrop-filter: blur(4px);
+                backdrop-filter: blur(4px);
+        border-radius: 32px;
+        display: flex;
+        overflow: hidden;
+      }
+      .search-section form input {
+        flex: 1;
+        border: none;
+        outline: none;
+        background-color: transparent;
+        padding-left: 2rem;
+        font-size: 18px;
+      }
+      .search-section form input::-moz-placeholder {
+        color: black;
+      }
+      .search-section form input::placeholder {
+        color: black;
+      }
+      .search-section form button {
+        width: 6rem;
+        background-color: transparent;
+        border: none;
+        outline: none;
+        border-left: 1px solid black;
+      }
+      .search-section form i {
+        rotate: -90deg;
+        font-size: 24px;
+      }
+      .search-section .list-container {
+        padding: 2rem;
+        background: rgba(255, 255, 255, 0.3);
+        border: 1px solid black;
+        box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.25);
+        -webkit-backdrop-filter: blur(4px);
+                backdrop-filter: blur(4px);
+        border-radius: 8px;
+      }
+      .search-section .list-top-container {
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid black;
+      }
+      .search-section .list-top-container span {
+        font-size: 18px;
+      }
+      .search-section .list-top-container a {
+        font-size: 16px;
+      }
+      .search-section .list-top-container a:hover {
+        text-decoration: underline;
+      }
+      .search-section .list-top-container .paginator {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+      }
+      .search-section .list-bottom-container {
+        padding-top: 2rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        -moz-column-gap: 1rem;
+             column-gap: 1rem;
+        row-gap: 2rem;
+      }
+      .search-section .card {
+        display: flex;
+        flex-direction: column;
+      }
+      .search-section .card img {
+        height: 14rem;
+        border-radius: 8px;
+      }
+      .search-section .card span {
+        font-size: 16px;
+        margin-top: 1rem;
+      }
+
+      .detail-section {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 8rem 0;
+        margin-bottom: 16rem;
+      }
+      .detail-section .feature-card {
+        padding: 1rem;
+        font-size: 32px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: rgba(255, 255, 255, 0.3);
+        height: -moz-fit-content;
+        height: fit-content;
+        border: 1px solid black;
+        box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.25);
+        -webkit-backdrop-filter: blur(4px);
+                backdrop-filter: blur(4px);
+        border-radius: 8px;
+        gap: 16px;
+      }
+      .detail-section .feature-card strong {
+        font-size: 96px;
+      }
+
+      .api-section {
+        background-color: rgba(255, 255, 255, 0.3);
+        border: 1px solid black;
+        margin-bottom: 8rem;
+        width: 100%;
+        padding: 4rem 2rem;
+      }
+      .api-section h1 {
+        font-size: 24px;
+        margin-bottom: 2rem;
+        text-decoration: underline;
+      }
+      .api-section h2 {
+        font-size: 18px;
+        font-weight: 400;
+      }
+
+      @media screen and (max-width: 900px) and (min-width: 720px) {
+        
+        .hero-section h1 {
+          font-size: 42px;
+        }
+        .search-section .list-bottom-container {
+          grid-template-columns: 1fr 1fr;
+        }
+        .search-section .list-bottom-container .card img {
+          height: 20vw;
+        }
+        
+        .detail-section .feature-card {
+          font-size: 22px;
+        }
+        .detail-section .feature-card strong {
+          font-size: 36px;
+        }
+      }
+      @media screen and (max-width: 720px) {
+        
+        .hero-section h1 {
+          font-size: 24px;
+        }
+        .search-section .list-bottom-container {
+          grid-template-columns: 1fr 1fr;
+        }
+        .search-section .list-bottom-container .card img {
+          height: 22vw;
+        }
+        
+        .detail-section {
+          flex-wrap: wrap;
+          row-gap: 4rem;
+        }
+        .detail-section .feature-card {
+          font-size: 16px;
+        }
+        .detail-section .feature-card strong {
+          font-size: 32px;
+        }
+
+        .api-section{
+          width:90%;
+          padding: 16px 8px;
+        }
+
+        .api-section h1{
+          font-size: 18px;
+        }
+
+        .api-section h2{
+          font-size: 14px;
+        }
+      }      
+
+</style>
+{% endblock css %}
+    
+
+{% block main %}
+  
+  {% if messages %}
+  <ul id="message-box">
+    {% for message in messages %}
+      <li class="message {{message.tags}}">{{message}}</li>
+    {% endfor %}
+  </ul>
+      
+  {% endif %}
+
+    <section class="hero-section">
+        <h1>A smart and simple way to detect cow breed using image processing.</h1>
+        <a href="{% url 'upload_details' %}">
+            <button>upload and scan</button>
+        </a>
+    </section>
+    <section class="search-section">
+        <form action="{% url 'search_list' %}" method="get">
+            <input type="search" name="search" id="search_id" placeholder="search breed ..." required>
+            <button type="submit"><i class="las la-search"></i></button>
+        </form>
+        <div class="list-container">
+            <div class="list-top-container">
+                <span>Cow breeds</span>
+                <a href="{% url 'search_list' 1 %}">view all</a>
+            </div>
+            <div class="list-bottom-container">
+              {% for breed in breeds %}
+                <a href="{% url 'upload_details' detail=breed.id %}"><div class="card">
+                    <div><img src="{{ breed.photo.url }}" alt=""></div>
+                    <span>{{ breed.name|title }}</span>
+                </div></a>
+              {% endfor %}
+            </div>
+        </div>
+    </section>
+
+  <section class="api-section">
+    <h1>API end points</h1>
+    <h2>List all breeds : <a target='_blank' href="{% url 'list_api' %}">http://{base url}/api/list/</a></h2>
+    <h2>Individual breed : <a target='_blank'  href="{% url 'retrieve_api' 1 %}">http://{base url}//api/list/{id}</a></h2>
+</section>
+{% endblock main %}

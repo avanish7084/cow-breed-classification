@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+
+{% block css %}
+    <style>
+        .about-project-section {
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.3);
+            border: 1px solid black;
+            box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.25);
+            -webkit-backdrop-filter: blur(4px);
+                    backdrop-filter: blur(4px);
+            border-radius: 8px;
+            width: 100%;
+            margin-top: 8rem;
+          }
+          .about-project-section h1 {
+            font-size: 22px;
+            margin-top: 0;
+          }
+          .about-project-section p {
+            font-size: 18px;
+          }
+          
+          .about-team-section {
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.3);
+            border: 1px solid black;
+            box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.25);
+            -webkit-backdrop-filter: blur(4px);
+                    backdrop-filter: blur(4px);
+            border-radius: 8px;
+            width: 100%;
+            margin-top: 2rem;
+            margin-bottom: 8rem;
+          }
+          .about-team-section h1 {
+            font-size: 22px;
+            margin-top: 0;
+          }
+          .about-team-section p {
+            font-size: 18px;
+          }
+
+          @media screen and (max-width: 900px) and (min-width: 720px) {
+            .about-project-section, .about-team-section {
+              width: 90%;
+              padding: 1rem;
+            }
+            .about-project-section h1, .about-team-section h1 {
+              font-size: 18px;
+            }
+            .about-project-section p, .about-team-section p {
+              font-size: 16px;
+            }
+          }
+          @media screen and (max-width: 720px) {
+            .about-project-section, .about-team-section {
+              width: 90%;
+              padding: 1rem;
+            }
+            .about-project-section h1, .about-team-section h1 {
+              font-size: 18px;
+            }
+            .about-project-section p, .about-team-section p {
+              font-size: 16px;
+            }
+          }
+    </style>
+{% endblock css %}
+    
+{% block main %}
+<div class="about-project-section">
+    <h1>About the project</h1>
+    <p>The work holds the objective to classify Cow breeds using Deep Learning Models and to get speciﬁc
+       information about that breed like the quantity of milk they give, the cost of follow-up
+       and all the general information related to that breed. In our project, we focus on four types of
+        species in which we would be training our deep learning model. Those breeds are Gir,Sahiwal, Rathi,
+         and Red Sindhi. This model will be using three diﬀerent CNN models in which we can check or classify an image by choosing a respective model and the model would categorize the breed type
+</p>
+</div>
+
+<div class="about-team-section">
+    <h1>Project Members</h1>
+    <p>This project is developed by <bold>Atharva Vishwakarma</bold>, <bold>Avanish Dubey</bold>, <bold>Ankit Kumar</bold>, and
+<bold>Sana Siddiqui</bold>, under the supervision of Mr. Atif Mahmood during the degree of Bachlors of Techology from department of Computer Science and Engineering of Pranveer Singh
+Institute of Technology, affiliated to Dr. A.P.J. Abdul Kalam Technical University, Lucknow.</p>
+</div>
+
+{% endblock main %}
+    

@@ -1,0 +1,201 @@
+{% extends 'base.html' %}
+
+
+{% block css %}
+    <style>
+        .section-container {
+            padding: 8rem 0;
+            width: 100%;
+            display: flex;
+            gap: 1rem;
+          }
+          
+          .detail-section {
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.3);
+            border: 1px solid black;
+            box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.25);
+            -webkit-backdrop-filter: blur(4px);
+                    backdrop-filter: blur(4px);
+            border-radius: 8px;
+            flex: 1;
+          }
+          .detail-section h1 {
+            font-size: 20px;
+            text-decoration: underline;
+            font-weight: 400;
+          }
+          .detail-section .image-container {
+            width: 24rem;
+            background-color: rgba(0, 0, 0, 0.25);
+            margin: 4rem auto;
+          }
+          .detail-section .image-container img{
+            width: 100%;
+          }
+          .detail-section h2 {
+            font-size: 20px;
+            text-decoration: underline;
+            font-weight: 400;
+            margin-top: 8rem;
+            margin-bottom: 2rem;
+          }
+          .detail-section p {
+            font-size: 18px;
+            line-height: 2rem;
+          }
+          .detail-section ul {
+            font-size: 18px;
+            line-height: 2rem;
+          }
+          
+          .upload-section {
+            height: -moz-fit-content;
+            height: fit-content;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.3);
+            border: 1px solid black;
+            box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.25);
+            -webkit-backdrop-filter: blur(4px);
+                    backdrop-filter: blur(4px);
+            border-radius: 8px;
+            width: 20rem;
+          }
+          .upload-section h1 {
+            font-size: 20px;
+            font-weight: 400;
+            margin-top: 0;
+          }
+          .upload-section .icon-container {
+            padding: 1rem 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 108px;
+            cursor: pointer;
+          }
+          .upload-section .icon-container span {
+            font-size: 22px;
+          }
+          .upload-section .select-image-btn {
+            width: 100%;
+            padding: 1rem 0;
+            background-color: rgba(0, 0, 0, 0.25);
+            text-align: center;
+            border: 1px solid black;
+            border-radius: 4px;
+            margin: 2rem 0;
+            font-size: 18px;
+          }
+          .upload-section input {
+            display: none;
+          }
+          .upload-section .submit-btn {
+            width: 100%;
+            padding: 1rem 0;
+            background-color: rgba(0, 0, 0, 0.25);
+            text-align: center;
+            border: 1px solid black;
+            border-radius: 4px;
+            font-size: 18px;
+          }
+
+          @media screen and (max-width: 900px) and (min-width: 720px) {
+            .section-container {
+              flex-direction: column;
+              width: calc(100vw - 10rem);
+            }
+            .detail-section {
+              padding: 1rem;
+            }
+            .detail-section .image-container {
+              width: 60%;
+            }
+            .upload-section {
+              width: 80%;
+            }
+          }
+          @media screen and (max-width: 720px) {
+            .section-container {
+              flex-direction: column;
+              width: 100%;
+              align-items: center;
+            }
+            .detail-section {
+              padding: 1rem;
+            }
+            .detail-section .image-container {
+              width: 100%;
+            }
+            .upload-section {
+              width: 90%;
+            }
+          }
+    </style>
+{% endblock css %}
+    
+
+{% block main %}
+
+{% if messages %}
+  <ul id="message-box">
+    {% for message in messages %}
+      <li class="message {{message.tags}}">{{message}}</li>
+    {% endfor %}
+  </ul>
+      
+  {% endif %}
+
+<section class="section-container">
+  {% if breed %}
+    <section class="detail-section">
+        <h1>{{ breed.name | title }} </h1>
+        <div class="image-container">
+          {% if image_url %}
+            <img src="{{image_url.photo.url}}" alt="">
+          {% else %}
+            <img src="{{ breed.photo.url }}" alt="">
+          {% endif %}
+        </div>
+        <h2>Description</h2>
+        <p>{{ breed.description }}</p>
+        <ul>
+          {% for information in breed.key_information|split:"<br>"  %}
+            <li>{{ information }}</li>
+          {% endfor %}
+        </ul>
+    </section>
+    {% endif %}
+    <form class="upload-section" action="{% url 'upload_details' %}" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+        <h1>Upload image to identify breed</h1>
+        <label for="select-image" class="icon-container"><i class="las la-upload"></i>
+          <span id="selected_img"></span>
+        </label>
+        <hr>
+        <label for="select-image"><div class="select-image-btn">select image</div></label>
+        <input type="file" name="select-image" id="select-image" required onchange="upload_photo(this)">
+        <button class="submit-btn">scan & identify</button>
+    </form>
+</section>
+{% endblock main %}
+    
+
+{% block jsscript %}
+<script>
+  function upload_photo(e){
+    if(e.value){
+      vl = e.value.split("\\");
+      console.log(e.value);
+      document.getElementById('selected_img').innerText = vl[2];
+    }
+    else{
+      alert("Please select an image!");
+    }
+  }
+
+  
+</script>
+{% endblock jsscript %}
+  

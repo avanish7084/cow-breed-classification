@@ -1,0 +1,213 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cow Breed Classifier</title>
+    <style>
+        * {
+            font-family: "Nanum Gothic", sans-serif;
+          }
+          
+          a {
+            color: black;
+            text-decoration: none;
+          }
+          
+          body {
+            margin: 0;
+          }
+          
+          .background-image {
+            background: linear-gradient(360deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 100%), url("{% static 'background-image.jpg' %}");
+            position: fixed;
+            top: 0;
+            z-index: -1;
+            height: 100vh;
+            width: 100vw;
+            background-size: cover;
+            background-position: 0;
+          }
+          
+          header {
+            width: calc(100vw - 20rem);
+            height: 6rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: auto;
+          }
+          
+          #home {
+            font-size: 22px;
+          }
+
+          #close-nav-btn, #open-nav-btn {
+            display: none;
+          }
+          
+          nav a {
+            margin-left: 2rem;
+            font-size: 16px;
+          }
+          
+          main {
+            width: calc(100vw - 20rem);
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+          }
+          
+          #message-box {
+            position: absolute;
+            top: 0;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+          }
+          
+          .message {
+            padding: 8px 16px;
+            font-size: 16px;
+            border: 1px solid black;
+            border-radius: 8px;
+            width: 40rem;
+            margin: 4px 0;
+            color: white;
+          }
+          
+          .success {
+            background-color: rgba(0, 128, 0, 0.4);
+          }
+          
+          .error {
+            background-color: rgba(255, 0, 0, 0.4);
+          }
+
+          footer {
+            height: 6rem;
+            background: rgba(255, 255, 255, 0.3);
+            border: 1px solid black;
+            -webkit-backdrop-filter: blur(4px);
+                    backdrop-filter: blur(4px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            gap: 4px;
+          }
+
+          @media screen and (max-width: 900px) and (min-width: 720px) {
+            header {
+              width: calc(100vw - 10rem);
+            }
+            main {
+              width: calc(100vw - 10rem);
+            }
+            #home {
+              font-size: 20px;
+            }
+            
+          }
+          @media screen and (max-width: 720px) {
+            header {
+              width: calc(100% - 3rem);
+              padding: 0 1rem;
+              position: relative;
+            }
+            #close-nav-btn {
+              position: absolute;
+              top: 4rem;
+              right: 4rem;
+            }
+            nav {
+              position: fixed;
+              top: 0;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              background-color: rgba(255, 255, 255, 0.3);
+              -webkit-backdrop-filter: blur(4px);
+                      backdrop-filter: blur(4px);
+              z-index: 2;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              display: none;
+            }
+            nav a {
+              margin: 1rem 0;
+              font-size: 24px;
+              font-weight: bold;
+            }
+            #close-nav-btn, #open-nav-btn {
+              display: block;
+              font-size: 24px;
+            }
+            main {
+              width: calc(100% - 3rem);
+            }
+            #home {
+              font-size: 16px;
+            }
+            
+          }          
+
+    </style>
+    {% block css %}
+        
+    {% endblock css %}
+        
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+</head>
+<body>
+    <div class="background-image"></div>
+    <header>
+        <a href="{% url 'home' %}" id="home">CowBreedClassifier</a>
+        <i id="open-nav-btn" class="las la-bars" onclick="showNav()"></i>
+        <nav id="navbar">
+          <i id="close-nav-btn" class="las la-times-circle" onclick="closeNav()"></i>
+            <a href="{% url 'search_list' 1 %}">search</a>
+            <a href="{% url 'upload_details' %}">upload</a>
+            <a href="{% url 'about' %}">about</a>
+        </nav>
+    </header>
+    <main>
+        
+        {% block main %}
+            
+        {% endblock main %}
+            
+    </main>
+    <footer>
+      developed by group<strong>23A19</strong>
+  </footer>
+  <script>
+    setTimeout(() => {
+      document.getElementById("message-box").style.display = "none";
+  }, 4000);
+
+  const showNav = () => {
+    document.getElementById("navbar").style.display = "flex";
+}
+
+const closeNav = ()=>{
+    document.getElementById("navbar").style.display = "none";
+}
+  </script>
+    
+    {% block jsscript %}
+      
+    {% endblock jsscript %}
+      
+</body>
+</html>
