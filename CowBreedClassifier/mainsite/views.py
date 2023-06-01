@@ -13,7 +13,7 @@ from django.contrib import messages
 from .run_model import predict_image
 from django.template.defaulttags import register
 
-breeds = {'GIR':3, 'RATHI':6, 'SHAIWAL':2, 'RED SINDHI': 1}
+breeds = {'GIR':3, 'RATHI':6, 'SAHIWAL':2, 'RED SINDHI': 1}
 
 @register.filter(name='split')
 def split(value, key):
