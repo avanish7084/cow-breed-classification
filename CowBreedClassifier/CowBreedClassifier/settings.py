@@ -119,7 +119,7 @@ MEDIA_URL = '/media/'
 
 print("-------------------------------- run ---------------------------------------")
 import tensorflow as tf
-TESTING_MODEL=tf.keras.models.load_model('/content/CowBreedClassifier/MyDrive/CowBreedClassifier/cowmodel.h5')
+TESTING_MODEL=tf.keras.models.load_model(BASE_DIR/'cowmodel.h5')
 
 print("-------------------------------- endrun ---------------------------------------")
 DATA_SET_PATH = BASE_DIR/'CowsFinal'
