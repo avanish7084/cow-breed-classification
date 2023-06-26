@@ -1,7 +1,9 @@
 # Cow Breed Classification
 
 The aim is to create a deep learning model which is will perform breed classification of a cow . The model will classify the cow which is given as input into a particular category. And for each model, we will plot a separate training and testing graph. The name of the breed is Sahiwal, Gir, Red Sindhi, and Rathi. CNN Models : DenseNet, Inception V3. Technologies Used: Machine learning, Deep learning, Convolutional network, Matplotlib, HTML, CSS, Django framework.
-github link:https://github.com/avanish7084/Cow-Breed-Classification-Project
+
+</br>
+Github link:https://github.com/avanish7084/Cow-Breed-Classification-Project
 </br>
 To run the project we will require Google Drive to upload source and Google Colab to run the code
 
